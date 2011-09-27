@@ -1,0 +1,24 @@
+#######################################
+# Syntax Coloring Map for NewSoftSerial
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Serial2Parallel	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+clear	KEYWORD2
+get	KEYWORD2
+set	KEYWORD2
+init	KEYWORD2
+sync	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+

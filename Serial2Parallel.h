@@ -51,7 +51,7 @@ public:
   bool   get   ( unsigned char index ); // NOTE: This will not read the value of the pin, just the flag in memory.
   void   set   ( unsigned char index
                , bool          value );
-  void   set   ( long          flags );
+  void   set   ( unsigned long flags );
   
   // ---------------------------------------------------------------- //
   // Clear resets the flags to zero

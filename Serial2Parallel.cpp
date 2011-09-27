@@ -20,7 +20,7 @@
   THE SOFTWARE.
 */
 
-#include <WProgram.h>
+#include <Arduino.h>
 #include <Serial2Parallel.h>
 
 #define  reset_us   10
@@ -32,7 +32,7 @@ Serial2Parallel::Serial2Parallel()
   : data  ( 0 )
   , clock ( 0 )
   , reset ( 0 )
-  , chips ( 0 )
+  , chips ( 1 )
   , flags ( 0 )
 {
 }
@@ -61,16 +61,17 @@ void Serial2Parallel::clear()
   digitalWrite      ( reset, LOW );
   delayMicroseconds ( reset_us );
   digitalWrite      ( reset, HIGH );
-  delayMicroseconds ( reset_us );
 }
 // ---------------------------------------------------------------------------- //
 void Serial2Parallel::sync()
 {  
+  digitalWrite      ( reset, LOW );
+  delayMicroseconds ( reset_us );
   digitalWrite      ( reset, HIGH );
 
   // Set all the bits in reverse order
-  unsigned char maxBit = chips*8 - 1;
-  for( unsigned char k = maxBit; k >= 0; --k )
+  int maxBit = chips*8 - 1;
+  for( int k = maxBit; k >= 0; --k )
   {
     // Set the data bit      
     digitalWrite      ( data, get(k) ? HIGH : LOW );
@@ -92,7 +93,7 @@ bool Serial2Parallel::get( unsigned char index )
   return (flags & (1 << index)) != 0;
 }
 // ---------------------------------------------------------------------------- //
-void Serial2Parallel::set( unsigned char _flags )
+void Serial2Parallel::set( unsigned long _flags )
 {
   flags = _flags;
 }
