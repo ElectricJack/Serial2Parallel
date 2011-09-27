@@ -67,11 +67,10 @@ void Serial2Parallel::clear()
 void Serial2Parallel::sync()
 {  
   digitalWrite      ( reset, HIGH );
-  //Try shiftout here!
 
   // Set all the bits in reverse order
-  int maxBit = chips*8 - 1;
-  for( int k = maxBit; k >= 0; --k )
+  unsigned char maxBit = chips*8 - 1;
+  for( unsigned char k = maxBit; k >= 0; --k )
   {
     // Set the data bit      
     digitalWrite      ( data, get(k) ? HIGH : LOW );
@@ -85,22 +84,22 @@ void Serial2Parallel::sync()
   }
 }
 // ---------------------------------------------------------------------------- //
-bool Serial2Parallel::get( int index )
+bool Serial2Parallel::get( unsigned char index )
 {
-  int maxBit = chips*8 - 1;
+  unsigned char maxBit = chips*8 - 1;
   if( index < 0 || index > maxBit ) return false;
   
   return (flags & (1 << index)) != 0;
 }
 // ---------------------------------------------------------------------------- //
-void Serial2Parallel::set( int _flags )
+void Serial2Parallel::set( unsigned char _flags )
 {
   flags = _flags;
 }
 // ---------------------------------------------------------------------------- //
-void Serial2Parallel::set( int index, bool value )
+void Serial2Parallel::set( unsigned char index, bool value )
 {
-  int maxBit = chips*8 - 1;
+  unsigned char maxBit = chips*8 - 1;
   if( index < 0 || index > maxBit ) return;
   
   if( value ) flags |=  (1 << index); // set the bitflag at index to true  (1)
